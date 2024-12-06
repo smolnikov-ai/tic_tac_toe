@@ -61,15 +61,7 @@ def get_data():
         make_move_pve()
 
     else:
-        name_gamer_x = input('Введите имя первого игрока: ')
-        # При отсутствии имени игрока (enter), устанавливается имя по умолчанию
-        if not name_gamer_x:
-            name_gamer_x = 'Крестик'
-        time.sleep(1)
-        name_gamer_o = input('Введите имя второго игрока: ')
-        # При отсутствии имени игрока (enter), устанавливается имя по умолчанию
-        if not name_gamer_o:
-            name_gamer_o = 'Нолик'
+        to_name_gamer()
         print(f'Игрок {name_gamer_x}, Ваш символ - ✗')
         time.sleep(1)
         print(f'Игрок {name_gamer_o}, Ваш символ - ○')
@@ -91,6 +83,36 @@ def mode_definition():
         time.sleep(1)
         mode_definition()
     return mode
+
+def to_name_gamer():
+    """
+    Запрашивает и сохраняет в глобальные переменные имена игроков.
+
+    Проводит проверку на совпадение имен.
+    В случае совпадения имен перезапускается.
+    """
+    global name_gamer_x, name_gamer_o
+    name_gamer_x = input('Введите имя первого игрока (можно скипнуть enter): ')
+    time.sleep(1)
+    print()
+    name_gamer_o = input('Введите имя второго игрока (можно скипнуть enter): ')
+    # При отсутствии имени игрока (enter), устанавливается имя по умолчанию
+    if not name_gamer_x:
+        name_gamer_x = 'Крестик'
+    if not name_gamer_o:
+        name_gamer_o = 'Нолик'
+
+    if name_gamer_x == name_gamer_o:
+        print(f'У игроков одинаковые имена. Ну или просто шизофрения. Да-да, у Вас {name_gamer_x}')
+        print()
+        time.sleep(2)
+        print('Я отвернусь, а когда повернусь - мы попробуем снова. Считаю до одного...')
+        for i in range(3, 0, -1):
+            print(i)
+            time.sleep(1)
+        print()
+        time.sleep(2)
+        to_name_gamer()
 
 def show_game_field():
     """
